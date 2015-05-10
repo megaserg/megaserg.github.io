@@ -1,26 +1,153 @@
 <html>
-    <head>
-        <title>megaserg.github.io!</title>
-        <style>
-            body, div {
-                font-family: Georgia, serif;
-                font-size: 54pt;
-                background-color: #CCCCDD;
-            }
-            div.centered {
-                color: #333344;
-                position: relative;
-                top: 20%;
-                width: 60%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="centered">
-            In America, you can always find a party.<br />
-            In Russia, the Party can always find you.
-        </div>
-    </body>
+<head>
+  <title>megaserg.github.io!</title>
+  <style>
+    body {
+      background-color: black;
+    }
+
+    div {
+      font-family: Georgia, serif;
+      font-size: 50pt;
+    }
+
+    div.centered {
+      color: white;
+      width: 50%;
+      height: 50%;
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      margin: auto;
+    }
+
+    .circle {
+      background-color: black;
+      position: absolute;
+    }
+  </style>
+
+  <script lang="text/javascript">
+    // Create cross browser requestAnimationFrame method:
+    window.requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(f) {
+          setTimeout(f, 1000 / 60);
+        };
+
+    var colors = ["#FF6633", "#FF66FF", "#6666FF", "#33CC99", "#99CC00", "#FFCC00"];
+
+    var randomColor = function() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    var bubblesPerLayer = function(layer) {
+      return (20 - layer * 2) * 5;
+    };
+
+    var createBubbleProps = function(n) {
+      var props = [];
+      for (var i = 0; i < n; i++) {
+        var propLayer = [];
+        for (var j = 0; j < bubblesPerLayer(i); j++) {
+          propLayer.push({
+            x: Math.random() * 120 - 10,
+            y: Math.random() * 100,
+            opacity: (((i + 1) * 1.0) / n - 0.5) * 0.6 + 0.4,
+            radius: (25 - i * 2),
+          });
+        }
+        props.push(propLayer);
+      }
+      return props;
+    };
+
+    var createBubbleDivs = function(n, container, props) {
+      var divs = [];
+      for (var i = 0; i < n; i++) {
+        var divLayer = [];
+        for (var j = 0; j < bubblesPerLayer(i); j++) {
+          var prop = props[i][j];
+
+          var div = document.createElement("div");
+          div.id = "bubble_" + i + "_" + j;
+          div.className = "circle";
+
+          div.style.opacity = prop.opacity;
+
+          var radius = prop.radius;
+          div.style.borderRadius = radius + "px";
+          div.style.mozBorderRadius = radius + "px";
+          div.style.webkitBorderRadius = radius + "px";
+          div.style.width = (radius * 2) + "px";
+          div.style.height = (radius * 2) + "px";
+
+          div.style.backgroundColor = randomColor();
+
+          div.style.top = prop.y + "%";
+
+          container.appendChild(div);
+          divLayer.push(div);
+        }
+        divs.push(divLayer);
+      }
+
+      return divs;
+    };
+
+    var moveBubbleDivs = function(n, divs, props, mouseX) {
+      for (var i = 0; i < n; i++) {
+        for (var j = 0; j < divs[i].length; j++) {
+          var div = divs[i][j];
+          var prop = props[i][j];
+
+          div.style.left = prop.x + (mouseX * (i + 1) / 100.0) + "%";
+        }
+      }
+    };
+
+    var currentMouseX = -1;
+    var handleMouseMoveBuilder = function(n, divs, props) {
+      return function(e) {
+        if (currentMouseX != e.clientX) {
+          currentMouseX = e.clientX;
+          console.log("opa");
+          var middle = screen.width / 2;
+          moveBubbleDivs(n, divs, props, currentMouseX - middle);
+        }
+      };
+    };
+
+    var onload = function() {
+      var layers = 5;
+
+      var bubbleProps = createBubbleProps(layers);
+      var bubbleContainer = document.getElementById("bubbleContainer");
+      var bubbleDivs = createBubbleDivs(layers, bubbleContainer, bubbleProps);
+      var handleMouseMove = handleMouseMoveBuilder(layers, bubbleDivs, bubbleProps);
+      handleMouseMove({clientX: 0});
+      document.addEventListener("mousemove", handleMouseMove, false);
+    };
+
+    document.addEventListener("DOMContentLoaded", onload);
+  </script>
+</head>
+
+<body>
+  <div id="bubbleContainer"></div>
+
+  <div class="centered">
+    In America, you can always find a party.
+    <br /> In Russia, the Party can always find you.
+  </div>
+
+</body>
+
 </html>
