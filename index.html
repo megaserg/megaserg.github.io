@@ -1,11 +1,27 @@
 <html>
 <head>
-  <title>megaserg.github.io!</title>
+  <title>sergey.party!</title>
   <style>
+
+    * {
+      margin: 0; /* to remove the top and left whitespace */
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%; /* just to be sure these are full screen */
+      height: 100%;
+    }
+
     body {
       background-color: black;
       overflow-x: hidden;
       overflow-y: hidden;
+    }
+
+    canvas {
+      display:block; /* To remove the scrollbars */
+      position: absolute;
     }
 
     div {
@@ -32,11 +48,6 @@
       border-radius: 10px;
       padding: 10px;
     }
-
-    .circle {
-      background-color: black;
-      position: absolute;
-    }
   </style>
 
   <script lang="text/javascript">
@@ -56,6 +67,14 @@
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
+    var decimizeColor = function(str) {
+      var repr =
+          parseInt(str[1] + str[2], 16) + "," +
+          parseInt(str[3] + str[4], 16) + "," +
+          parseInt(str[5] + str[6], 16);
+      return repr;
+    };
+
     var bubblesPerLayer = function(layer) {
       return (100 - layer * 3);
     };
@@ -66,10 +85,10 @@
         var propLayer = [];
         for (var j = 0; j < bubblesPerLayer(i); j++) {
           propLayer.push({
-            x: Math.random() * 120 - 10,
-            y: Math.random() * 110 - 5,
+            x: Math.random() * 1.2 - 0.1,
+            y: Math.random() * 1.1 - 0.05,
             opacity: (((i + 1) * 1.0) / n - 0.5) * 0.6 + 0.4,
-            radius: (30 - i * 2),
+            radius: (40 - i * 2),
           });
         }
         props.push(propLayer);
@@ -77,78 +96,78 @@
       return props;
     };
 
-    var createBubbleDivs = function(n, container, props) {
-      var divs = [];
+    var createCanvases = function(n, canvasContainer, props) {
+      var canvases = [];
       for (var i = 0; i < n; i++) {
-        var divLayer = [];
-        for (var j = 0; j < bubblesPerLayer(i); j++) {
+        var canvas = document.createElement("canvas");
+        canvases.push(canvas);
+        canvasContainer.appendChild(canvas);
+
+        canvas.id = "canvas_" + i;
+        canvas.width = document.body.clientWidth * 1.2;
+        canvas.height = document.body.clientHeight * 1.2;
+
+        var context = canvas.getContext("2d");
+        context.globalAlpha = props[i][0].opacity;
+
+        for (var j = 0; j < props[i].length; j++) {
           var prop = props[i][j];
 
-          var div = document.createElement("div");
-          div.id = "bubble_" + i + "_" + j;
-          div.className = "circle";
-
-          div.style.opacity = prop.opacity;
-
+          var centerX = prop.x * canvas.width;
+          var centerY = prop.y * canvas.height;
           var radius = prop.radius;
-          div.style.borderRadius = radius + "px";
-          div.style.mozBorderRadius = radius + "px";
-          div.style.webkitBorderRadius = radius + "px";
-          div.style.width = (radius * 2) + "px";
-          div.style.height = (radius * 2) + "px";
+          var gradient = context.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+          var color = decimizeColor(randomColor());
 
-          div.style.backgroundColor = randomColor();
-
-          div.style.top = prop.y + "%";
-
-          container.appendChild(div);
-          divLayer.push(div);
+          gradient.addColorStop(0, "rgba(" + color + ", 1)");
+          gradient.addColorStop(0.7, "rgba(" + color + ", 0.8)");
+          gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+          context.fillStyle = gradient;
+          context.fillRect(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
         }
-        divs.push(divLayer);
       }
 
-      return divs;
+      return canvases;
     };
 
-    var moveBubbleDivs = function(n, divs, props, mouseX) {
+    var moveBubbleDivs = function(n, canvases, props, mouseX, mouseY) {
       for (var i = 0; i < n; i++) {
-        for (var j = 0; j < divs[i].length; j++) {
-          var div = divs[i][j];
-          var prop = props[i][j];
-
-          div.style.left = prop.x + (mouseX * (i + 1) / 1000.0) + "%";
-        }
+        canvases[i].style.left = -10 + (mouseX * (i + 1) / 1000.0) + "%";
+        canvases[i].style.top = -10 + (mouseY * (i + 1) / 1000.0) + "%";
       }
     };
 
     var currentMouseX = -1;
-    var handleMouseMoveBuilder = function(n, divs, props) {
+    var currentMouseY = -1;
+    var handleMouseMoveBuilder = function(n, canvases, props) {
       return function(e) {
-        if (currentMouseX != e.clientX) {
+        if (currentMouseX != e.clientX || currentMouseY != e.clientY) {
           currentMouseX = e.clientX;
-          var middle = screen.width / 2;
-          moveBubbleDivs(n, divs, props, currentMouseX - middle);
+          currentMouseY = e.clientY;
+          var middleX = document.body.clientWidth / 2;
+          var middleY = document.body.clientHeight / 2;
+          moveBubbleDivs(n, canvases, props, currentMouseX - middleX, currentMouseY - middleY);
         }
       };
     };
 
-    var onload = function() {
+    var handleOnload = function() {
       var layers = 10;
 
       var bubbleProps = createBubbleProps(layers);
-      var bubbleContainer = document.getElementById("bubbleContainer");
-      var bubbleDivs = createBubbleDivs(layers, bubbleContainer, bubbleProps);
-      var handleMouseMove = handleMouseMoveBuilder(layers, bubbleDivs, bubbleProps);
-      handleMouseMove({clientX: 0});
+      var canvasContainer = document.getElementById("canvasContainer");
+      var canvases = createCanvases(layers, canvasContainer, bubbleProps);
+      var handleMouseMove = handleMouseMoveBuilder(layers, canvases, bubbleProps);
+      handleMouseMove({clientX: 0, clientY: 0});
       document.addEventListener("mousemove", handleMouseMove, false);
     };
 
-    document.addEventListener("DOMContentLoaded", onload);
+    document.addEventListener("DOMContentLoaded", handleOnload);
   </script>
 </head>
 
 <body>
-  <div id="bubbleContainer"></div>
+  <div id="canvasContainer"></div>
 
   <div class="centered">
     <div class="message">
