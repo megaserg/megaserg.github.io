@@ -109,6 +109,7 @@
 
         var context = canvas.getContext("2d");
         context.globalAlpha = props[i][0].opacity;
+        // canvas.style.opacity = props[i][0].opacity;
 
         for (var j = 0; j < props[i].length; j++) {
           var prop = props[i][j];
@@ -133,7 +134,7 @@
     var moveBubbleDivs = function(n, canvases, props, mouseX, mouseY) {
       for (var i = 0; i < n; i++) {
         canvases[i].style.left = -10 + (mouseX * (i + 1) / 1000.0) + "%";
-        canvases[i].style.top = -10 + (mouseY * (i + 1) / 1000.0) + "%";
+        canvases[i].style.top = -5 + (mouseY * (i + 1) / 1000.0) + "%";
       }
     };
 
