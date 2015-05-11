@@ -109,7 +109,6 @@
 
         var context = canvas.getContext("2d");
         context.globalAlpha = props[i][0].opacity;
-        // canvas.style.opacity = props[i][0].opacity;
 
         for (var j = 0; j < props[i].length; j++) {
           var prop = props[i][j];
@@ -138,15 +137,24 @@
       }
     };
 
-    var currentMouseX = -1;
-    var currentMouseY = -1;
-    var handleMouseMoveBuilder = function(n, canvases, props) {
-      return function(e) {
-        if (currentMouseX != e.clientX || currentMouseY != e.clientY) {
-          currentMouseX = e.clientX;
-          currentMouseY = e.clientY;
+    var currentMouseX = 0;
+    var currentMouseY = 0;
+    var needRerender = true;
+    var handleMouseMove = function(e) {
+      if (currentMouseX != e.clientX || currentMouseY != e.clientY) {
+        currentMouseX = e.clientX;
+        currentMouseY = e.clientY;
+        needRerender = true;
+      }
+    };
+
+    var renderFunctionBuilder = function(n, canvases, props) {
+      return function() {
+        if (needRerender) {
+          needRerender = false;
           var middleX = document.body.clientWidth / 2;
           var middleY = document.body.clientHeight / 2;
+
           moveBubbleDivs(n, canvases, props, currentMouseX - middleX, currentMouseY - middleY);
         }
       };
@@ -158,9 +166,14 @@
       var bubbleProps = createBubbleProps(layers);
       var canvasContainer = document.getElementById("canvasContainer");
       var canvases = createCanvases(layers, canvasContainer, bubbleProps);
-      var handleMouseMove = handleMouseMoveBuilder(layers, canvases, bubbleProps);
-      handleMouseMove({clientX: 0, clientY: 0});
+
       document.addEventListener("mousemove", handleMouseMove, false);
+
+      var renderFunction = renderFunctionBuilder(layers, canvases, bubbleProps);
+      (function animationLoop() {
+        renderFunction();
+        requestAnimationFrame(animationLoop);
+      })();
     };
 
     document.addEventListener("DOMContentLoaded", handleOnload);
