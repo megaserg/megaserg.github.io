@@ -1,0 +1,12 @@
+# Site settings
+title: megaserg devblog
+email: sergey@serebryakov.info
+description: > # this means to ignore newlines until "baseurl:"
+  This is my devblog with my sometimes original thoughts and opinions.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://sergey.party" # the base hostname & protocol for your site
+twitter_username: megaserg
+github_username:  megaserg
+
+# Build settings
+markdown: kramdown

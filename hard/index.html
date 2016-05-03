@@ -1,0 +1,199 @@
+<html>
+<head>
+  <title>sergey.party!</title>
+  <style>
+
+    * {
+      margin: 0; /* to remove the top and left whitespace */
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%; /* just to be sure these are full screen */
+      height: 100%;
+    }
+
+    body {
+      background-color: black;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    a {
+      color: white;
+    }
+
+    canvas {
+      display:block; /* To remove the scrollbars */
+      position: absolute;
+    }
+
+    div.centered {
+      width: 650px;
+      height: 50%;
+
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      margin: auto;
+    }
+
+    div.message {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 10px;
+
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 50pt;
+    }
+  </style>
+
+  <script lang="text/javascript">
+    // Create cross browser requestAnimationFrame method:
+    window.requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(f) {
+          setTimeout(f, 1000 / 60);
+        };
+
+    var colors = ["#FF6633", "#FF66FF", "#6666FF", "#33CC99", "#99CC00", "#FFCC00"];
+
+    var randomColor = function() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    var decimizeColor = function(str) {
+      var repr =
+          parseInt(str[1] + str[2], 16) + "," +
+          parseInt(str[3] + str[4], 16) + "," +
+          parseInt(str[5] + str[6], 16);
+      return repr;
+    };
+
+    var bubblesPerLayer = function(layer) {
+      return (100 - layer * 3);
+    };
+
+    var createBubbleProps = function(n) {
+      var props = [];
+      for (var i = 0; i < n; i++) {
+        var propLayer = [];
+        for (var j = 0; j < bubblesPerLayer(i); j++) {
+          propLayer.push({
+            x: Math.random() * 1.2 - 0.1,
+            y: Math.random() * 1.1 - 0.05,
+            opacity: (((i + 1) * 1.0) / n - 0.5) * 0.6 + 0.4,
+            radius: (40 - i * 2),
+          });
+        }
+        props.push(propLayer);
+      }
+      return props;
+    };
+
+    var createCanvases = function(n, canvasContainer, props) {
+      var canvases = [];
+      for (var i = 0; i < n; i++) {
+        var canvas = document.createElement("canvas");
+        canvases.push(canvas);
+        canvasContainer.appendChild(canvas);
+
+        canvas.id = "canvas_" + i;
+        canvas.width = document.body.clientWidth * 1.2;
+        canvas.height = document.body.clientHeight * 1.2;
+
+        var context = canvas.getContext("2d");
+        context.globalAlpha = props[i][0].opacity;
+
+        for (var j = 0; j < props[i].length; j++) {
+          var prop = props[i][j];
+
+          var centerX = prop.x * canvas.width;
+          var centerY = prop.y * canvas.height;
+          var radius = prop.radius;
+          var gradient = context.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+          var color = decimizeColor(randomColor());
+
+          gradient.addColorStop(0, "rgba(" + color + ", 1)");
+          gradient.addColorStop(0.7, "rgba(" + color + ", 0.8)");
+          gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+          context.fillStyle = gradient;
+          context.fillRect(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
+        }
+      }
+
+      return canvases;
+    };
+
+    var moveBubbleDivs = function(n, canvases, props, mouseX, mouseY) {
+      for (var i = 0; i < n; i++) {
+        canvases[i].style.left = -10 + (mouseX * (i + 1) / 1000.0) + "%";
+        canvases[i].style.top = -5 + (mouseY * (i + 1) / 1000.0) + "%";
+      }
+    };
+
+    var currentMouseX = 0;
+    var currentMouseY = 0;
+    var needRerender = true;
+    var handleMouseMove = function(e) {
+      if (currentMouseX != e.clientX || currentMouseY != e.clientY) {
+        currentMouseX = e.clientX;
+        currentMouseY = e.clientY;
+        needRerender = true;
+      }
+    };
+
+    var renderFunctionBuilder = function(n, canvases, props) {
+      return function() {
+        if (needRerender) {
+          needRerender = false;
+          var middleX = document.body.clientWidth / 2;
+          var middleY = document.body.clientHeight / 2;
+
+          moveBubbleDivs(n, canvases, props, currentMouseX - middleX, currentMouseY - middleY);
+        }
+      };
+    };
+
+    var handleOnload = function() {
+      var layers = 10;
+
+      var bubbleProps = createBubbleProps(layers);
+      var canvasContainer = document.getElementById("canvasContainer");
+      var canvases = createCanvases(layers, canvasContainer, bubbleProps);
+
+      document.addEventListener("mousemove", handleMouseMove, false);
+
+      var renderFunction = renderFunctionBuilder(layers, canvases, bubbleProps);
+      (function animationLoop() {
+        renderFunction();
+        requestAnimationFrame(animationLoop);
+      })();
+    };
+
+    document.addEventListener("DOMContentLoaded", handleOnload);
+  </script>
+</head>
+
+<body>
+  <div id="canvasContainer"></div>
+
+  <div class="centered">
+    <div class="message">
+      In America, you can<br />
+      always <a href="https://youtu.be/dQw4w9WgXcQ">find a party</a>.<br />
+      In Russia, the Party<br />
+      can always find you.
+    </div>
+  </div>
+
+</body>
+
+</html>
