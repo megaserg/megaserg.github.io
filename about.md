@@ -1,11 +1,16 @@
 ---
 layout: page
-title: About
+title: About me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Hello, my name is Sergey Serebryakov. I am an engineer who likes reading, programming, and foreign languages.
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+#### What kind of engineering do you like?
+Full stack with inclination to backend, algorithmic bottlenecks, data structures, high-load low-latency scalable fault-tolerant architectures, distributed systems, code quality and design, static analysis, security, machine learning, computer vision, functional programming.
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+#### What human languages do you know?
+English, German, Russian, a little French.
+
+#### What programming languages interest you?
+In no particular order: Elm, Haskell, Scala, Java, Go, Erlang, Python, JavaScript.
