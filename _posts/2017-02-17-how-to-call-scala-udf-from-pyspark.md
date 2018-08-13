@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How to call Scala UDFs from PySpark"
+tags: scala, spark, pyspark
 ---
 
 # Motivation
