@@ -18,7 +18,7 @@ email: sergey@serebryakov.info
 description: > # this means to ignore newlines until "baseurl:"
   This is my programming blog with my (sometimes original) thoughts and opinions.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://sergey.party" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://sergey.party" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: megaserg
 github_username: megaserg
 
@@ -27,3 +27,6 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+
+disqus:
+  shortname: megaserg-blog
