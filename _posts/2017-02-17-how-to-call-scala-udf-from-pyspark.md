@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "How to call Scala UDFs from PySpark"
+title: "How to call Scala UDFs from PySpark"
 tags: scala, spark, pyspark
+crosspost_to_medium: true
 ---
 
 # Motivation

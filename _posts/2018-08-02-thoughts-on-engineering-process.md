@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Thoughts on engineering process"
+title: "Thoughts on engineering process"
 tags: problem, solution, design, engineering
+crosspost_to_medium: true
 ---
 
 Engineering is solving problems. Software engineering is solving problems with software. *Professional* SWE is doing so sustainably, repeatedly, continuously. This means some kind of process is necessary.

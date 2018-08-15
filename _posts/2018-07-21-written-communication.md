@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "A case for written communication"
+title: "A case for written communication"
 tags: communication, reading, writing
+crosspost_to_medium: true
 ---
 
 **TL;DR:** In corporate world, explicit written communication is better than word-of-mouth and telephone game. Most meetings are better when they start and finish with a written document. To become a happy and productive team, ask to put things in writing.

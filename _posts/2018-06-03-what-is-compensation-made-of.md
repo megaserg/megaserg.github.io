@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "What is compensation made of"
+title: "What is compensation made of"
 tags: compensation, money, offers
+crosspost_to_medium: true
 ---
 
 **Disclaimer:** This post is about software engineer compensation in United States. I'm using **40%** total tax rate in calculations. I am also not a lawyer or tax advisor.
