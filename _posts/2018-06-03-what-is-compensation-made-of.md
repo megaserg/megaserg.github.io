@@ -5,7 +5,7 @@ tags: compensation, money, offers
 crosspost_to_medium: true
 ---
 
-**Disclaimer:** This post is about software engineer compensation in United States. I'm using **40%** total tax rate in calculations. I am also not a lawyer or tax advisor.
+**Disclaimer:** This post is about software engineer compensation in United States. I'm using **40%** total tax rate in calculations (can be lower depending on your family situation). I am also not a lawyer or tax advisor.
 
 Sometimes you find yourself in the situation where you have multiple job offers and need to choose between them. There are many variables that should come into your decision, and one of them is comparing the financial side of the offers. Some of the components are not obvious, so this post will hopefully help you to evaluate the total fair market value of your offers. Make sure to ask your contacts at the company about these items, if they are not explicitly stated in writing.
 
@@ -22,6 +22,8 @@ Sometimes you find yourself in the situation where you have multiple job offers 
 - **Annual bonus policy.** Profitable companies often have a “target” annual bonus which can be **10%** or **15%** of the base salary, and the actual bonus for the year is somehow computed from the company performance and your personal performance.
 - **Raises/promotion policy.** Usually the companies at least try to keep up with inflation, so you can expect **1-2%** raise yearly. However, you should also keep in mind whether it's going to be easy to get promoted (and get a raise/bonus associated with it).
 - **Performance/per-project bonus policy.** Some companies reward engineers based on evidence they've put in good work: after a performance review, or after a release was shipped.
+
+Bonuses might be taxed a bit higher than your normal pay.
 
 # Other perks
 
