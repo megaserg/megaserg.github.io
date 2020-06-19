@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Becoming a digital nomad"
+tags: travel, sf
+crosspost_to_medium: true
+---
+
 I’m going to move out of my San Francisco apartment and spend some time living in the countryside.
 
 My company (based in SF) has been in working-from-home mode since Mar 9, 2020. The latest communication said that we’ll be WFH until at least Labor Day (Sep 7, 2020). There are doubts about whether it will be considered safe to return to the office at that time. Meanwhile, San Francisco is sinking into its glorious future, becoming less and less pleasant to live in. In the pandemic/quarantine/shelter-in-place situation, it’s clear big cities are overrated. I’ve recently spent a month in Crescent City (small town at the California/Oregon border), working remotely, and enjoyed it a lot. Also I realized that I only need 1 backpack + 1 suitcase worth of stuff to maintain most of my lifestyle indefinitely. So I think I’ll enjoy spending some more time in smaller towns, continuing to work remotely. I’m putting my stuff in the storage and leaving SF for a while.
