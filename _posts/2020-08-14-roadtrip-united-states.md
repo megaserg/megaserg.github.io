@@ -54,6 +54,8 @@ I opened Google Maps and started to pick cities that I’m interested in, never 
   - **Los Angeles, California (1 week)**
   - San Francisco
 
+![Map of the trip](/assets/20200814-roadtrip-map.jpg)
+
 I decided to search the week-long stays on Airbnb, and book the overnight stays on booking.com. On Airbnb, I put in the dates from Sunday to Saturday (or the next Sunday – depends on whether I need to drive both weekend days), filter by "has A/C" and limit the price by **$100/night** (my inspiration is to fit into **$3000/month**, which is comparable to what I would be paying for a 1-bedroom apartment, had I stayed in SF). Then I check the location (walkable distance to “civilization” like restaurants and grocery stores), photos, and reviews. For some reason, Airbnb doesn’t include the service fee/cleaning fee in the per-night price, so the lowest-price place might not end up being cheaper!
 
 Another gotcha is non-“instant booking” listings: one time, I submitted a request to book the place, and Airbnb told me that I’ll get a response within **24 hours**… except that **24 hours** later, there was no response from the host at all, and my request just expired, while I needed a place to sleep tonight. I’m not sure what is the expected behavior here (apart from booking far in advance): if I attempt to book multiple places in parallel, Airbnb warns me I can be double-charged. I’d like to be allowed some redundancy, with the first-response-wins or another strategy.
