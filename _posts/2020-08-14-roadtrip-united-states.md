@@ -29,15 +29,15 @@ I opened Google Maps and started to pick cities that I’m interested in, never 
   - Rapid City, South Dakota
   - **Fargo, North Dakota (1 week)**
   - Minneapolis, Minnesota
-  - **Milwaukee, Illinois (1 week)**
+  - **Milwaukee, Wisconsin (1 week)**
 - *September*
   - **St. Louis, Missouri (1 week)**
   - **Indianapolis, Indiana (1 week)**
   - **Cleveland, Ohio (1 week)**
-  - **Boston, Massachusetts (1 week)**
-- *October*
-  - **Portland, Maine (1 week)**
   - **Upstate New York (1 week)**
+- *October*
+  - **Boston, Massachusetts (1 week)**
+  - **Portland, Maine (1 week)**
   - **New York City (1 week)**
   - Norfolk, Virginia
   - **Charlotte, North Carolina (1 week)**
