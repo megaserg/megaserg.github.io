@@ -33,20 +33,23 @@ I opened Google Maps and started to pick cities that I’m interested in, never 
 - *September*
   - **St. Louis, Missouri (1 week)**
   - **Indianapolis, Indiana (1 week)**
+  - Cincinnati, Ohio
   - **Cleveland, Ohio (1 week)**
   - **Upstate New York (1 week)**
 - *October*
   - **Boston, Massachusetts (1 week)**
   - **Portland, Maine (1 week)**
   - **New York City (1 week)**
+  - **Washington, D.C. (1 week)**
+- *November*
   - Norfolk, Virginia
   - **Charlotte, North Carolina (1 week)**
-- *November*
-  - **Nashville, Tennessee (2 weeks)**
+  - **Nashville, Tennessee (1 week)**
   - Birmingham, Alabama
-  - **New Orleans, Louisiana (2 weeks)**
+  - **New Orleans, Louisiana (1 week)**
+  - Houston, Texas
+  - **South Padre Island, Texas (2 weeks)**
 - *December*
-  - **Houston, Texas (1 week)**
   - **Austin, Texas (1 week)**
   - Amarillo, Texas
   - **Albuquerque, New Mexico (1 week)**
